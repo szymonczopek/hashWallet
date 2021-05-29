@@ -1,0 +1,215 @@
+.plansza-tlo
+{
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(45,45,45,1) 43%, rgba(117,117,117,1) 80%, rgba(117,117,117,1) 100%);
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 6vh;
+    width: 90%;
+    height: 90%;
+   color: black; 
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    align-items: center;
+} 
+.plansza-biala
+{
+    
+    font-size: 2vh;
+    background: #fff;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 6vh;
+    width: 94%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+#nav-hover{
+    border-left: 0;
+    border-right: 3px solid #fff;
+}
+.plansza-pasek{
+    box-sizing: border-box;
+    width: 90%;
+    height: 10%; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    
+    
+}
+.plansza-pasek-lewo,
+.plansza-pasek-prawo{
+    height: 100%;
+    width: 10%;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+    
+}
+.plansza-pasek-srodek{
+    padding: 0 2%;
+    background: gold;
+    border-radius: 10vh;
+}
+.plansza-srodek{
+    box-sizing: border-box;
+    height: 90%;
+    width: 72%;
+    /*background: orange;*/
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+   
+}
+.plansza-srodek img{
+    height: 100%;
+    width: 100%;
+   
+    
+}
+.mur{
+    height: 100%;
+    width: 66%;
+    background: url("zdjecia/tlo.png");
+}
+
+
+.poz1{
+    position: absolute;
+    top: 32%;
+    right: 36%;
+}
+
+
+.poz2{
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}
+
+.poz3{
+    position: absolute;
+    right: 33%;
+    bottom: 32%;
+}
+
+.poz4{
+    position: absolute;
+    left:33%;
+    bottom: 23%;
+}
+.poz1 img,
+.poz2 img,
+.poz3 img,
+.poz4 img{
+    height: 10vh;
+    width: 8vw;
+   
+}
+
+.plansza-pasek-lewo{
+  box-sizing: border-box;
+    position: relative;
+    
+    
+}
+.plansza-pasek-lewo a{
+    color: black;
+}
+.plansza-pasek-prawo a{
+    color: black;
+}
+.plansza-pasek-lewo ul li a{
+    color: #fff;
+}
+.plansza-pasek-prawo ul li a{
+    color: #fff;
+}
+
+
+.plansza-pasek-lewo ul{
+    position: absolute;
+    background: black;
+    list-style: none;
+    padding:10px 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin: auto;
+    display: none;
+    color: gold;
+    
+}
+
+.plansza-pasek-lewo a:focus{
+   
+    
+    opacity: 0.6;
+}
+.plansza-pasek-lewo a:focus +ul
+{
+    display: block
+}
+
+.plansza-pasek-lewo ul:hover {
+    display: block;
+    
+}
+.plansza-pasek-lewo ul li{
+    padding: 2px;
+}
+.plansza-pasek-lewo ul li:hover{
+   
+     opacity: 0.6;
+}
+
+.plansza-pasek-prawo{
+  box-sizing: border-box;
+    position: relative;
+    
+    } 
+ 
+
+.plansza-pasek-prawo ul{
+    position: absolute;
+    background: rgba(117,117,117,1);
+    list-style: none;
+    padding:10px 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin: auto;
+    display: none;
+    color: gold;
+}
+
+.plansza-pasek-prawo a:hover{
+   
+    
+    opacity: 0.6;
+}
+.plansza-pasek-prawo a:focus +ul
+{
+    display: block
+}
+
+.plansza-pasek-prawo ul:hover {
+    display: block;
+    
+}
+.plansza-pasek-prawo ul li{
+    padding: 2px;
+    
+}
+.plansza-pasek-prawo ul li:hover{
+   
+     opacity: 0.6;
+}
+
