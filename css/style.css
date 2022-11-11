@@ -18,9 +18,9 @@ h3{
     margin: 0;
     padding: 0 1vw;
     width: auto;
-    
-    
 }
+
+
 .log input, 
 .register input{
    font-family: 'Acme', sans-serif;
@@ -34,18 +34,8 @@ h3{
     text-align: center;
     border-radius: 10vw;
     color: rgba(117,117,117);
-    transition-delay: 0.25s;
+    margin:1vh 0;
     }
-
-.log input:focus,
-.register input:focus{
-    width: 15vw;
-    border: 2px solid gold;
-    
-}
-
-
-
 
 .log input[type="submit"],
 .register input[type="submit"]{
@@ -53,18 +43,15 @@ h3{
     background: gold;
     margin: 0;
     padding: 0 1vw;
-
-    
 }
 
 .baner{
     box-sizing: border-box;
-  font-family: 'MedievalSharp', cursive;
     color: gold;
-    font-size: 90px;
+    font-size: 10vh;
     text-align: center;
     width: 50vw;
-    
+    height: 80%;
     }
 
 
@@ -157,15 +144,15 @@ header{
      opacity: 0.6;
 }
 .main{
-   background: url("zdjecia/slide1.jpg");
-    height: 80vh;
+   background: url("zdjecia/slide1.jpg")no-repeat fixed center;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .main img{
-    width: 100vw;
-    height: 80vh;
+    /*width: 100vw;*/
+    /*height: auto;*/
 } 
 .log{
     background: linear-gradient(90deg, rgba(45,45,45,1) 43%, rgba(117,117,117,1) 80%);
@@ -187,7 +174,6 @@ header{
     border: 2px solid white;
     border-radius: 6vh;
     width: 55vw;
-    height: 40vh;
     text-align: center;
     display: flex;
     flex-direction:column;
@@ -204,7 +190,6 @@ header{
    
 }
 .register form{
-    height: 30vh;
     text-align: center;
     display: flex;
     flex-direction:column;
@@ -214,13 +199,11 @@ header{
 
 footer
 {
-    position: fixed;
     box-sizing: border-box;
     display: flex;
     font-size: 20px;
     text-align: center;
     background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(45,45,45,1) 43%, rgba(117,117,117,1) 80%, rgba(117,117,117,1) 100%);
-    bottom: 0px;
     width: 100%;
     height: 5vh;
     align-items: center;
@@ -236,11 +219,7 @@ footer
     {
         height: auto;
     }
-    .baner
-    {
-        width: 100%;
-        height: 80%;
-    }
+
     .navigation
     {
         width: 100%;

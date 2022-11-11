@@ -15,39 +15,56 @@ class Baza {
         //udało sie zmienić kodowanie
         }
        
-    } //koniec funkcji konstruktora
+    }
     
     function __destruct() {
         $this->mysqli->close();
     }
-    public function select($sql, $pola) {
+
+    public function selectPole($sql, $pola) {
         //parametr $sql – łańcuch zapytania select
-        //parametr $pola - tablica z nazwami pol w bazie 
+        //parametr $pola - tablica z nazwami pol w bazie
         //Wynik funkcji – kod HTML tabeli z rekordami (String)
         $tresc = " ";
         if ($result = $this->mysqli->query($sql)) {
             $ilepol = count($pola); //ile pól
             $ile = $result->num_rows; //ile wierszy
             // pętla po wyniku zapytania $results
-            
+
             while ($row = $result->fetch_object()) {
-                
+
                 for ($i = 0; $i < $ilepol; $i++) {
                     $p = $pola[$i];
                     $tresc.=$row->$p;
                 }
                 $tresc.=" ";
             }
-            
+
             $result->close(); /* zwolnij pamięć */
         }
-        
+
+        return $tresc;
+    }
+    function showPasswordRow($userId)
+    {
+        $tresc = [];
+        if ($result = $this->mysqli->query("select * from password where userId='$userId'")) {
+            //$ilepol = count($pola); //ile pól
+            $ile = $result->num_rows; //ile wierszy
+            // pętla po wyniku zapytania $results
+
+              while ($row = $result->fetch_object()) {
+                  array_push($tresc,$row);
+              }
+
+            $result->close(); /* zwolnij pamięć */
+        }
         return $tresc;
     }
     public function insert($sql) {
-        //Dodawanie do bazy
-        if($this->mysqli->query($sql)==TRUE) {
-            echo "Zarejestrowano pomyślnie";
+
+        if($this->mysqli->query($sql)) {
+            echo "Record was added";
         }
         else{
             echo "Błąd: ".$this->mysqli->error;
@@ -60,7 +77,7 @@ class Baza {
         
     }
   public function update($sql) {
-        //Dodawanie do bazy
+
         if($this->mysqli->query($sql)==TRUE) {
            
         }
@@ -81,8 +98,10 @@ class Baza {
  if ($ile == 1) {
  $row = $result->fetch_object(); //pobierz rekord z użytkownikiem
  $hash = $row->password; //pobierz zahaszowane hasło użytkownika
- //sprawdź czy pobrane hasło pasuje do tego z tabeli bazy danych:
- if (password_verify($passwd, $hash))
+     $salt=$row->salt;
+     $passwd=$salt.$passwd;
+
+     if (password_verify($passwd, $hash))
  $id = $row->id_user; //jeśli hasła się zgadzają - pobierz id użytkownika
  }
  }

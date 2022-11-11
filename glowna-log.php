@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Castle Zaloguj</title>
+    <title> HashWallet Login</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -16,18 +16,18 @@
     
     <header>
         <div class="baner">
-            -Castle-
+            HashWallet
         </div>
         <div class="navigation">
         
             <div class="right">   
-                <div class="main-button"> <a href="index.php">Strona głowna</a></div>
+                <div class="main-button"> <a href="index.php">Home</a></div>
             <div  id="nav-hover" >
-                <a href="#">Logowanie</a>
+                <a href="#">Login</a>
                     
                         <ul>
-                            <li><a href="glowna-log.php">Zaloguj</a></li>
-                            <li><a href="glowna-rej.php">Zarejetruj</a></li>
+                            <li><a href="glowna-log.php">Login</a></li>
+                            <li><a href="glowna-rej.php">Register</a></li>
                         </ul>
                </div>
         </div>
@@ -36,11 +36,11 @@
    
    <div class=main>
        <div class="log">
-       <h3>ZALOGUJ</h3>
+       <h3>Login</h3>
            <form action="glowna-log.php" method="post">
-           <input name="login" type="text" placeholder="LOGIN">
-           <input name="passwd" type="password" placeholder="HASŁO">
-           <input name="submit" type="submit" value="Zaloguj">
+           <input name="login" type="text" placeholder="Login">
+           <input name="passwd" type="password" placeholder="Password">
+           <input name="submit" type="submit" value="Login">
            </form>
            <?php
             include_once("controllers/login.php");
@@ -50,7 +50,7 @@
       
         </div>
          <footer>
-        <div >Szymon</div>
+        <div >Szymon Czopek</div>
     </footer> 
     
         

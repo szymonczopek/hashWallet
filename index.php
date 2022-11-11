@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Castle </title>
+    <title> HashWallet </title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -17,18 +17,18 @@
     
     <header>
         <div class="baner">
-            -Castle-
+            HashWallet
         </div>
         <div class="navigation">
         
             <div class="right">   
-                <div class="main-button"> <a href="index.php">Strona głowna</a></div>
+                <div class="main-button"> <a href="index.php">Home</a></div>
             <div  id="nav-hover" >
-                <a href="#">Logowanie</a>
+                <a href="#">Login</a>
                     
                         <ul>
-                            <li><a href="glowna-log.php">Zaloguj</a></li>
-                            <li><a href="glowna-rej.php">Zarejetruj</a></li>
+                            <li><a href="glowna-log.php">Login</a></li>
+                            <li><a href="glowna-rej.php">Register</a></li>
                         </ul>
                </div>
         </div>
@@ -36,12 +36,12 @@
         </header>
    
    <div class=main>
-    
-   
-      
+    <?php
+
+      ?>
         </div>
          <footer>
-        <div >Szymon</div>
+        <div >Szymon Czopek</div>
     </footer> 
     
         

@@ -1,7 +1,7 @@
 <?php
  include_once 'klasy/Baza.php';
  include_once 'klasy/UserManager.php';
- $db = new Baza("localhost", "root", "", "castle");
+ $db = new Baza("localhost", "root", "", "bsiBase");
  $um = new UserManager();
 
 
@@ -13,9 +13,10 @@
  $um->logout($db);
  }
  //kliknięto przycisk submit z name = zaloguj
- if (filter_input(INPUT_POST, "submit")=="Zaloguj") {
+ if (filter_input(INPUT_POST, "submit")=="Login") {
      
- $userId=$um->login($db); //sprawdź parametry logowania
+ $userId=$um->login($db);
+
  if ($userId > 0) {
  header("location: controllers/plansza.php");
      

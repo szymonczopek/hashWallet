@@ -7,15 +7,15 @@ class UserManager {
  function login($db) {
  //funkcja sprawdza poprawność logowania
  //wynik - id użytkownika zalogowanego lub -1
- $args = array(
+ $validate = array(
                 'login' => ['fil'=> FILTER_SANITIZE_FULL_SPECIAL_CHARS, 'filter'  => FILTER_VALIDATE_REGEXP, 'options' => ['regexp' => '@^[a-ząęłńśćźżóA-Z0-9\!\@\#\$\%\^\&\*]{1,25}$@'] ],
                 'passwd'  => ['fil'=> FILTER_SANITIZE_FULL_SPECIAL_CHARS, 'filter'  => FILTER_VALIDATE_REGEXP, 'options' => ['regexp' => '@^[a-ząęłńśćźżóA-Z0-9\!\@\#\$\%\^\&\*]{1,25}$@'] ]
             
                 
                 
             );
- //przefiltruj dane z GET (lub z POST) zgodnie z ustawionymi w $args filtrami:
- $dane = filter_input_array(INPUT_POST, $args);
+ //przefiltruj dane z GET (lub z POST) zgodnie z ustawionymi filtrami:
+ $dane = filter_input_array(INPUT_POST, $validate);
  //sprawdź czy użytkownik o loginie istnieje w tabeli users
  //i czy podane hasło jest poprawne
  $login = $dane["login"];
@@ -30,12 +30,12 @@ $userId = $db->selectUser($login, $passwd, "users");
      session_start();
      $_SESSION['login']=$login;
      $_SESSION['passwd']=$passwd;
-     $_SESSION['id_user']=$userId;
-     
+     $_SESSION['userId']=$userId;
+
     
      
  //usuń wszystkie wpisy historyczne dla użytkownika o $userId
-     $sql="DELETE FROM logged_in_users WHERE id='$userId'";
+     $sql="DELETE FROM logged_in_users WHERE userId='$userId'";
      $db->delete($sql);
  //ustaw datę - format("Y-m-d H:i:s");
      $data=new DateTime('now');

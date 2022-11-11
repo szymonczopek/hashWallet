@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Castle Zarejestruj</title>
+    <title> HashWallet Register</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -16,18 +16,18 @@
     
     <header>
         <div class="baner">
-            -Castle-
+            HashWallet
         </div>
         <div class="navigation">
         
             <div class="right">   
-                <div class="main-button"> <a href="index.php">Strona głowna</a></div>
+                <div class="main-button"> <a href="index.php">Home</a></div>
             <div  id="nav-hover" >
-                <a href="#">Logowanie</a>
+                <a href="#">Login</a>
                     
                         <ul>
-                            <li><a href="glowna-log.php">Zaloguj</a></li>
-                            <li><a href="glowna-rej.php">Zarejetruj</a></li>
+                            <li><a href="glowna-log.php">Login</a></li>
+                            <li><a href="glowna-rej.php">Register</a></li>
                         </ul>
                </div>
         </div>
@@ -36,25 +36,32 @@
    
    <div class=main>
        <div class="register">
-       <h3>ZAREJESTRUJ</h3>
+       <h3>Register</h3>
            
            <form action="glowna-rej.php" method="post">
-           <input name="login" type="text" placeholder="LOGIN" title="Dostępne znaki specjalne !@#$%^&*">
-           <input name="email"  placeholder="EMAIL">
-           <input name="pass" type="password" placeholder="HASŁO" title="Hasło. Dostępne znaki specjalne !@#$%^&*">
-           <input name="pass2" type="password" placeholder="POWTORZ HASŁO" title="Hasła muszą być identyczne">
-           <input name="submit" type="submit" value="Zarejestruj">
+           <input name="login" type="text" placeholder="Login" title="Dostępne znaki specjalne !@#$%^&*">
+           <input name="email"  placeholder="Email">
+           <input name="pass" type="password" placeholder="Password" title="Hasło. Dostępne znaki specjalne !@#$%^&*">
+           <input name="pass2" type="password" placeholder="Password" title="Hasła muszą być identyczne">
+               Encrypt:<br>
+               <div class="radioButtons">
+                   <input type="radio" name="encrypt_choose" value="sha"/>
+                   <label for="sha">SHA</label>
+                   <input type="radio" name="encrypt_choose" value="hmac"/>
+                   <label for="hmac">HMAC</label><br>
+               </div>
+           <input name="submit" type="submit" value="Register">
            </form>
             <?php
        include_once("controllers/register.php");
-           
+
        ?>
        </div>
   
       
         </div>
          <footer>
-        <div >Szymon</div>
+        <div >Szymon Czopek</div>
     </footer> 
     
         
