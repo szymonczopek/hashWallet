@@ -49,11 +49,8 @@ class Baza {
     {
         $tresc = [];
         if ($result = $this->mysqli->query("select * from password where userId='$userId'")) {
-            //$ilepol = count($pola); //ile pól
             $ile = $result->num_rows; //ile wierszy
-            // pętla po wyniku zapytania $results
-
-              while ($row = $result->fetch_object()) {
+            while ($row = $result->fetch_object()) {
                   array_push($tresc,$row);
               }
 
@@ -67,7 +64,7 @@ class Baza {
             echo "Record was added";
         }
         else{
-            echo "Błąd: ".$this->mysqli->error;
+            echo "Error: ".$this->mysqli->error;
         }
         
     }
@@ -82,7 +79,7 @@ class Baza {
            
         }
         else{
-            echo "Błąd: ".$this->mysqli->error;
+            echo "Error: ".$this->mysqli->error;
         }
         
     }

@@ -13,14 +13,14 @@ if(filter_input(INPUT_POST,"submit"))
                 'encrypt_choose' => ['fil'=> FILTER_SANITIZE_FULL_SPECIAL_CHARS]
             );
 
-            $dane = filter_input_array(INPUT_POST, $validate);
+            $data = filter_input_array(INPUT_POST, $validate);
            
 
             $errors = "";
-           if($dane['pass2']!=$dane['pass'])
-               $errors.= "Hasla nie sa zgodne!";
+           if($data['pass2']!=$data['pass'])
+               $errors.= "Password does not match";
             
-                foreach($dane as $key => $val){
+                foreach($data as $key => $val){
                 if($val === false or $val === NULL){
                     $errors .= $key . " ";
                 }
@@ -28,8 +28,8 @@ if(filter_input(INPUT_POST,"submit"))
 
             if($errors === ""){
               
-                $login=$dane['login'];
-                $email=$dane['email'];
+                $login=$data['login'];
+                $email=$data['email'];
 
                 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $salt = '';
@@ -37,20 +37,20 @@ if(filter_input(INPUT_POST,"submit"))
                     $salt .= $characters[rand(0, strlen($characters))];
                 }
 
-                $pass=$salt.$dane['pass2'];
+                $pass=$salt.$data['pass2'];
 
-                if($dane['encrypt_choose']==="sha")
+                if($data['encrypt_choose']==="sha")
                 {
                     $pass=password_hash($pass,CRYPT_SHA512);
                 }
-                if($dane['encrypt_choose']==="hmac")
+                if($data['encrypt_choose']==="hmac")
                 {
                     $pass=password_hash($pass,HASH_HMAC);
                 }
 
                 $bd->insert("INSERT INTO users VALUES (NULL,'$login','$email','$pass','$salt')");
             }else{
-                echo "<br>Niepoprawne dane: ".$errors."</br>Najedź kursorem na pole w celu podpowiedzi";
+                echo "<br>Invalid data: ".$errors."</br>Hover over a field for hints";
             }
     }
 

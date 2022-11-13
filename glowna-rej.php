@@ -39,10 +39,10 @@
        <h3>Register</h3>
            
            <form action="glowna-rej.php" method="post">
-           <input name="login" type="text" placeholder="Login" title="Dostępne znaki specjalne !@#$%^&*">
+           <input name="login" type="text" placeholder="Login" title="Account login. Available special characters !@#$%^&*">
            <input name="email"  placeholder="Email">
-           <input name="pass" type="password" placeholder="Password" title="Hasło. Dostępne znaki specjalne !@#$%^&*">
-           <input name="pass2" type="password" placeholder="Password" title="Hasła muszą być identyczne">
+           <input name="pass" type="password" placeholder="Password" title="Account password. Available special characters !@#$%^&*">
+           <input name="pass2" type="password" placeholder="Password" title="Passwords must match">
                Encrypt:<br>
                <div class="radioButtons">
                    <input type="radio" name="encrypt_choose" value="sha"/>

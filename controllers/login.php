@@ -21,7 +21,7 @@
  header("location: controllers/plansza.php");
      
  } else {
- echo "<p>Błędna nazwa użytkownika lub hasło</p>";
+ echo "<p>Invalid login or password</p>";
  }
  }  
 ?>

@@ -29,7 +29,7 @@
 
                 <ul>
                     <li><a href="plansza.php">Home</a></li>
-                    <li><a href="#">Change password</a></li>
+                    <li><a href="changePassword.php">Change password</a></li>
                 </ul>
             </div>
             <div class="main-button"> <a href='login.php?akcja=wyloguj' >Logout</a></div>
@@ -76,7 +76,7 @@
             echo '<th>'.$passwords->web_address.'</th>';
             echo '<th>'."<a href='planszaEditPassword.php?edit=$passwords->id_password'>Edit row</a>".'</th>';
             echo '<th>'."<a href='plansza-show.php?show=$passwords->id_password'>Show password</a>".'</th>';
-            echo '<th>'."<a href='plansza-dzialanie.php?delete=$passwords->id_password'>Delete row</a>".'</th>';
+            echo '<th>'."<a href='plansza-dzialanie.php?delete=$passwords->id_password'>X</a>".'</th>';
             echo '<tr>';
 
         }
