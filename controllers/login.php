@@ -1,6 +1,6 @@
 <?php
- include_once 'klasy/Baza.php';
- include_once 'klasy/UserManager.php';
+ include_once 'classes/Baza.php';
+ include_once 'classes/UserManager.php';
  $db = new Baza("localhost", "root", "", "bsiBase");
  $um = new UserManager();
 
@@ -18,7 +18,7 @@
  $userId=$um->login($db);
 
  if ($userId > 0) {
- header("location: controllers/plansza.php");
+ header("location: controllers/mainBoardView.php");
      
  } else {
  echo "<p>Invalid login or password</p>";

@@ -27,8 +27,8 @@
                 <a href="#">Login</a>
                     
                         <ul>
-                            <li><a href="glowna-log.php">Login</a></li>
-                            <li><a href="glowna-rej.php">Register</a></li>
+                            <li><a href="loginView.php">Login</a></li>
+                            <li><a href="registerView.php">Register</a></li>
                         </ul>
                </div>
         </div>

@@ -45,7 +45,7 @@ class Baza {
 
         return $tresc;
     }
-    function showPasswordRow($userId)
+    function getPasswordRow($userId)
     {
         $tresc = [];
         if ($result = $this->mysqli->query("select * from password where userId='$userId'")) {
@@ -90,24 +90,21 @@ class Baza {
  $id = -1;
  $sql = "SELECT * FROM $tabela WHERE login='$login'";
 
- if ($result = $this->mysqli->query($sql)) {
- $ile = $result->num_rows;
- if ($ile == 1) {
- $row = $result->fetch_object(); //pobierz rekord z użytkownikiem
- $hash = $row->password; //pobierz zahaszowane hasło użytkownika
-     $salt=$row->salt;
-     $passwd=$salt.$passwd;
+     if ($result = $this->mysqli->query($sql)) {
+         $ile = $result->num_rows;
+         if ($ile == 1) {
+             $row = $result->fetch_object(); //pobierz rekord z użytkownikiem
+             $hash = $row->password; //pobierz zahaszowane hasło użytkownika
+                 $salt=$row->salt;
+                 $passwd=$salt.$passwd;
 
-     if (password_verify($passwd, $hash))
- $id = $row->id_user; //jeśli hasła się zgadzają - pobierz id użytkownika
- }
- }
+                 if (password_verify($passwd, $hash))
+                    $id = $row->id_user; //jeśli hasła się zgadzają - pobierz id użytkownika
+         }
+     }
     
- return $id; //id zalogowanego użytkownika(>0) lub -1
+    return $id; //id zalogowanego użytkownika(>0) lub -1
 }
    
-
-    
-    
-} //koniec klasy Baza
+}
 ?>

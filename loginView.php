@@ -26,8 +26,8 @@
                 <a href="#">Login</a>
                     
                         <ul>
-                            <li><a href="glowna-log.php">Login</a></li>
-                            <li><a href="glowna-rej.php">Register</a></li>
+                            <li><a href="loginView.php">Login</a></li>
+                            <li><a href="registerView.php">Register</a></li>
                         </ul>
                </div>
         </div>
@@ -37,7 +37,7 @@
    <div class=main>
        <div class="log">
        <h3>Login</h3>
-           <form action="glowna-log.php" method="post">
+           <form action="loginView.php" method="post">
            <input name="login" type="text" placeholder="Login">
            <input name="passwd" type="password" placeholder="Password">
            <input name="submit" type="submit" value="Login">

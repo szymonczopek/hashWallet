@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/gra.css">
+    <link rel="stylesheet" href="../css/mainBoard.css">
 </head>
 
   
@@ -27,7 +27,7 @@
                 <a href="#">My account</a>
 
                 <ul>
-                    <li><a href="plansza.php">Home</a></li>
+                    <li><a href="mainBoardView.php">Home</a></li>
                     <li><a href="changePassword.php">Change password</a></li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
        <div class="register">
        <h3>Change password</h3>
            
-           <form action="plansza-dzialanie.php" method="post">
+           <form action="mainBoardAction.php" method="post">
                <input name="currentPass" type="password" placeholder="Current password" title="Current account password">
                <input name="newPass" type="password" placeholder="New password" title="New account password. Available special characters !@#$%^&*">
                <input name="newPass2" type="password" placeholder="New password repeat" title="Passwords must match">

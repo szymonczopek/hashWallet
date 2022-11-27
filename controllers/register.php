@@ -1,5 +1,5 @@
 <?php
-include_once "klasy/Baza.php";
+include_once "classes/Baza.php";
 $bd=new Baza("localhost","root","","bsiBase");
 
  

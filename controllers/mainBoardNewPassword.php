@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Castle Plansza </title>
+    <title> Hash Wallet </title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/gra.css">
+    <link rel="stylesheet" href="../css/mainBoard.css">
 </head>
 
 
@@ -28,7 +28,7 @@
                 <a href="#">My account</a>
 
                 <ul>
-                    <li><a href="plansza.php">Home</a></li>
+                    <li><a href="mainBoardView.php">Home</a></li>
                     <li><a href="changePassword.php">Change password</a></li>
                 </ul>
             </div>
@@ -42,18 +42,17 @@
     <div class="plansza-tlo">
 
         <?php
-        include ("plansza-dzialanie.php");
+        include ("mainBoardAction.php");
         $db = new Baza("localhost", "root", "", "bsiBase");
         $login=$_SESSION['login'];
-        $salt=$_SESSION['salt'];
         $userId=$_SESSION['userId'];
 
         echo '<div class="login">';
-        showLogin($login,$salt); //pokazywanie loginu i soli
+        showLogin($login); //pokazywanie loginu
         echo '</div>';
 
         echo '<div class="wallet">';
-        $res=$db->showPasswordRow($userId);
+        $res=$db->getPasswordRow($userId);
 
         if($res!=null) {
             echo '<table>';
@@ -74,29 +73,28 @@
             echo '<th>'.$passwords->password.'</th>';
             echo '<th>'.$passwords->description.'</th>';
             echo '<th>'.$passwords->web_address.'</th>';
-            echo '<th>'."<a href='planszaEditPassword.php?edit=$passwords->id_password'>Edit row</a>".'</th>';
-            echo '<th>'."<a href='plansza-show.php?show=$passwords->id_password'>Show password</a>".'</th>';
-            echo '<th>'."<a href='plansza-dzialanie.php?delete=$passwords->id_password'>X</a>".'</th>';
+            echo '<th>'."<a href='mainBoardEditPassword.php?edit=$passwords->id_password'>Edit row</a>".'</th>';
+            echo '<th>'."<a href='mainBoardShowPasswords.php?show=$passwords->id_password'>Show password</a>".'</th>';
+            echo '<th>'."<a href='mainBoardAction.php?delete=$passwords->id_password'>X</a>".'</th>';
             echo '<tr>';
 
         }
         echo'</table>';
         echo '</div>';
 
-        $idPass=filter_input(INPUT_GET,'edit');
-
-
-      echo'  <div class="plansza-form">';
-        echo'    <form action="plansza-dzialanie.php?edit='.$idPass.'" method="post">';
-         echo'       <div style="color: gold;font-size: 25px;">Edit password<br></div>';
-         echo'       <input name="login" placeholder="Login"><br>';
-          echo'      <input name="password" placeholder="Password"><br>';
-          echo'      <input name="description" placeholder="Description"><br>';
-          echo'      <input name="webAddress" placeholder="Web Address"><br>';
-          echo'      <input type="submit" value="Edit" name="editPassword">';
-         echo'   </form>';
-      echo'  </div>';
         ?>
+
+        <div class="plansza-form">
+            <form action="mainBoardAction.php" method="post">
+                <div style="color: gold;font-size: 25px;">Add new password<br></div>
+                <input name="login" placeholder="Login"><br>
+                <input name="password" placeholder="Password"><br>
+                <input name="description" placeholder="Description"><br>
+                <input name="webAddress" placeholder="Web Address"><br>
+                <input type="submit" value="Add" name="addPassword">
+            </form>
+        </div>
+
     </div>
 
 </div>
