@@ -49,7 +49,7 @@
           $userId=$_SESSION['userId'];
 
           echo '<div class="login">';
-          $passOb->showLogin($login); //pokazywanie loginu
+          echo   $passOb->showLogin($login); //pokazywanie loginu
           echo '</div>';
 
           echo '<div class="wallet">';

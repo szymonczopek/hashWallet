@@ -53,6 +53,7 @@ public function deletePassword($db){
     header("location: ../controllers/mainBoardView.php");
 }
 public function changeMainPassword($db,$login,$userId){
+
     $data =$this-> validateChangePassword(INPUT_POST);
 
     $user = $db->selectUser($login, $data['currentPass'], "users");
@@ -103,7 +104,7 @@ public function changeMainPassword($db,$login,$userId){
 }
     function showLogin($login)
     {
-        echo "User name: " . $login . "<br/>";
+        return "User name: " . $login . "<br/>";
     }
 
     function validateRecordPassword($input)

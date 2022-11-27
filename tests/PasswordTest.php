@@ -17,7 +17,7 @@ class PasswordTest extends TestCase
     }
 
 
-    public function testIsCorrectYes()
+    public function testIsValidationCorrect_Yes()
     {
         $data=[
             'login'=>'szymon',
@@ -30,7 +30,7 @@ class PasswordTest extends TestCase
 
         $this->assertEquals('',$errors);
     }
-    public function testIsCorrectBadLoginAndWebAddress()
+    public function testIsValidationCorrect_BadLoginAndWebAddress()
     {
         $data=[
             'login'=>'szymon',
@@ -44,7 +44,7 @@ class PasswordTest extends TestCase
       $this->assertEquals('password webAddress ',$errors);
     }
 
-    public function testIsChangePasswordDataCorrectYes()
+    public function testIsChangePasswordDataCorrect_Yes()
     {
         $user=5;
         $data=[
@@ -58,7 +58,7 @@ class PasswordTest extends TestCase
 
         $this->assertEquals('',$errors);
     }
-    public function testIsChangePasswordDataCorrectPasswordDoNotMatch()
+    public function testIsChangePasswordDataCorrect_PasswordDoNotMatch()
     {
         $user=5;
         $data=[
@@ -72,11 +72,11 @@ class PasswordTest extends TestCase
 
         $this->assertEquals('Password does not match',$errors);
     }
-    public function testIsChangePasswordDataCorrectInvalidCurrentPassword()
+    public function testIsChangePasswordDataCorrect_InvalidCurrentPassword()
     {
         $user=-1;
         $data=[
-            'currentPass'=>'szymon',
+            'currentPass'=>'zlehaslo',
             'newPass'=>'haslo',
             'newPass2'=>'haslo',
             'encrypt_choose'=>'sha',
@@ -86,7 +86,18 @@ class PasswordTest extends TestCase
 
         $this->assertEquals('Invalid current password',$errors);
     }
+    public function testIsStringShowLogin(){
+        $login='szymon';
 
+        $showLogin=$this->pass->showLogin($login);
+        $this->assertIsString($showLogin);
+    }
+    public function testCorrectShowLogin(){
+        $login='szymon';
+
+        $showLogin=$this->pass->showLogin($login);
+        $this->assertEquals("User name: " . $login . "<br/>",$showLogin);
+    }
 
 
 
