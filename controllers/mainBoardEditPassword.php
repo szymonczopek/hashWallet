@@ -44,11 +44,12 @@
         <?php
         include ("mainBoardAction.php");
         $db = new Baza("localhost", "root", "", "bsiBase");
+        $passOb= new Password();
         $login=$_SESSION['login'];
         $userId=$_SESSION['userId'];
 
         echo '<div class="login">';
-        showLogin($login); //pokazywanie loginu
+        $passOb->showLogin($login); //pokazywanie loginu
         echo '</div>';
 
         echo '<div class="wallet">';
