@@ -54,6 +54,7 @@ public function deletePassword($db){
 }
 public function changeMainPassword($db,$login,$userId){
     $data =$this-> validateChangePassword(INPUT_POST);
+
     $user = $db->selectUser($login, $data['currentPass'], "users");
 
     $errors = $this->isChangePasswordDataCorrect($user, $data);

@@ -55,19 +55,19 @@
           echo '<div class="wallet">';
 
           $res=$db->getPasswordRow($userId);
-if($res!=null) {
-    echo '<table>';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th>Login</th>';
-    echo '<th>Password</th>';
-    echo '<th>Description</th>';
-    echo '<th>Web Address</th>';
-    echo '<th> </th>';
-    echo '</tr>';
-    echo '</thead>';
+    if($res!=null) {
+        echo '<table>';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>Login</th>';
+        echo '<th>Password</th>';
+        echo '<th>Description</th>';
+        echo '<th>Web Address</th>';
+        echo '<th> </th>';
+        echo '</tr>';
+        echo '</thead>';
 
-}
+    }
 
           foreach ($res as $passwords){
               echo '<tr>';
