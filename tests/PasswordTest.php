@@ -28,7 +28,7 @@ class PasswordTest extends TestCase
 
         $errors = $this->pass->isValidationCorrect($data);
 
-        $this->assertEquals('',$errors);
+        self::assertEquals('',$errors);
     }
     public function testIsValidationCorrect_BadLoginAndWebAddress()
     {
@@ -41,7 +41,7 @@ class PasswordTest extends TestCase
 
        $errors = $this->pass->isValidationCorrect($data);
 
-      $this->assertEquals('password webAddress ',$errors);
+        self::assertEquals('password webAddress ',$errors);
     }
 
     public function testIsChangePasswordDataCorrect_Yes()
@@ -56,7 +56,7 @@ class PasswordTest extends TestCase
 
         $errors = $this->pass->isChangePasswordDataCorrect($user,$data);
 
-        $this->assertEquals('',$errors);
+        self::assertEquals('',$errors);
     }
     public function testIsChangePasswordDataCorrect_PasswordDoNotMatch()
     {
@@ -70,8 +70,9 @@ class PasswordTest extends TestCase
 
         $errors = $this->pass->isChangePasswordDataCorrect($user,$data);
 
-        $this->assertEquals('Password does not match',$errors);
+        self::assertEquals('Password does not match',$errors);
     }
+
     public function testIsChangePasswordDataCorrect_InvalidCurrentPassword()
     {
         $user=-1;
@@ -84,19 +85,19 @@ class PasswordTest extends TestCase
 
         $errors = $this->pass->isChangePasswordDataCorrect($user,$data);
 
-        $this->assertEquals('Invalid current password',$errors);
+        self::assertEquals('Invalid current password',$errors);
     }
     public function testIsStringShowLogin(){
         $login='szymon';
 
         $showLogin=$this->pass->showLogin($login);
-        $this->assertIsString($showLogin);
+        self::assertIsString($showLogin);
     }
     public function testCorrectShowLogin(){
         $login='szymon';
 
         $showLogin=$this->pass->showLogin($login);
-        $this->assertEquals("User name: " . $login . "<br/>",$showLogin);
+        self::assertEquals("User name: " . $login . "<br/>",$showLogin);
     }
 
 
