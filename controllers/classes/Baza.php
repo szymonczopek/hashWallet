@@ -49,7 +49,7 @@ class Baza {
     {
         $tresc = [];
         if ($result = $this->mysqli->query("select * from password where userId='$userId'")) {
-            $ile = $result->num_rows; //ile wierszy
+           // $ile = $result->num_rows; //ile wierszy
             while ($row = $result->fetch_object()) {
                   array_push($tresc,$row);
               }
@@ -58,10 +58,36 @@ class Baza {
         }
         return $tresc;
     }
+    function getLog($userId)
+    {
+        $tresc = [];
+        if ($result = $this->mysqli->query("select * from logged_in_users where userId='$userId'")) {
+
+            while ($row = $result->fetch_object()) {
+                array_push($tresc,$row);
+            }
+
+            $result->close(); /* zwolnij pamięć */
+        }
+        return $tresc;
+    }
+    function getBlockLogin($ipAddress)
+    {
+        $tresc = [];
+        if ($result = $this->mysqli->query("select * from block_login where ipAddress='$ipAddress'")) {
+
+            while ($row = $result->fetch_object()) {
+                array_push($tresc,$row);
+            }
+
+            $result->close(); /* zwolnij pamięć */
+        }
+        return $tresc;
+    }
     public function insert($sql) {
 
         if($this->mysqli->query($sql)) {
-            echo "Record was added";
+
         }
         else{
             echo "Error: ".$this->mysqli->error;
@@ -87,8 +113,7 @@ class Baza {
     public function selectUser($login, $passwd, $tabela) {
  //parametry $login, $passwd , $tabela – nazwa tabeli z użytkownikami
  //wynik – id użytkownika lub -1 jeśli dane logowania nie są poprawne
- $id = -1;
- $sql = "SELECT * FROM $tabela WHERE login='$login'";
+        $sql = "SELECT * FROM $tabela WHERE login='$login'";
 
      if ($result = $this->mysqli->query($sql)) {
          $ile = $result->num_rows;
@@ -97,13 +122,16 @@ class Baza {
              $hash = $row->password; //pobierz zahaszowane hasło użytkownika
                  $salt=$row->salt;
                  $passwd=$salt.$passwd;
-
-                 if (password_verify($passwd, $hash))
-                    $id = $row->id_user; //jeśli hasła się zgadzają - pobierz id użytkownika
+             $user['id'] = $row->id_user;
+                 if (password_verify($passwd, $hash)) {
+                      $user['access']=true;
+                 }else {
+                     $user['access']=false;
+                 }
          }
      }
     
-    return $id; //id zalogowanego użytkownika(>0) lub -1
+    return $user; //id zalogowanego użytkownika(>0) lub -1
 }
    
 }

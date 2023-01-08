@@ -52,6 +52,43 @@
           echo   $passOb->showLogin($login); //pokazywanie loginu
           echo '</div>';
 
+          echo '<div class="board">';
+          echo '<div class="logged">';
+
+          $logs=$db->getLog($userId);
+          if($logs!=null) {
+              echo '<table>';
+              echo '<thead>';
+              echo '<tr>';
+              echo '<th>Success</th>';
+              echo '<th>Session ID</th>';
+              echo '<th>User ID</th>';
+              echo '<th>Date</th>';
+              echo '<th>IP Address</th>';
+              echo '<th> </th>';
+              echo '</tr>';
+              echo '</thead>';
+
+          }
+
+
+          foreach ($logs as $log){
+              echo '<tr>';
+              echo '<th>';
+              if($log->logSuccess ==1 ) echo '✔';
+              else echo '❌';
+              echo '<th>'.$log->sessionId.'</th>';
+              echo '<th>'.$log->userId.'</th>';
+              echo '<th>'.$log->lastUpdate.'</th>';
+
+              echo'</th>';
+              echo '<th>'.$log->ipAddress.'</th>';
+              echo '<tr>';
+
+          }
+          echo'</table>';
+          echo '</div>';
+
           echo '<div class="wallet">';
 
           $res=$db->getPasswordRow($userId);
@@ -83,6 +120,8 @@
          }
           echo'</table>';
 
+
+          echo '</div>';
           echo '</div>';
             ?>
 

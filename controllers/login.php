@@ -15,10 +15,10 @@
  //kliknięto przycisk submit z name = zaloguj
  if (filter_input(INPUT_POST, "submit")=="Login") {
      
- $userId=$um->login($db);
+ $user=$um->login($db);
 
- if ($userId > 0) {
- header("location: controllers/mainBoardView.php");
+ if ($user['access'] === true) {
+     header("location: controllers/mainBoardView.php");
      
  } else {
  echo "<p>Invalid login or password</p>";
