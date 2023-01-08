@@ -16,6 +16,8 @@
  if (filter_input(INPUT_POST, "submit")=="Login") {
      
  $user=$um->login($db);
+     $tempLock=$user['tempLock'];
+ if($tempLock !== NULL) echo $user->tempLock.' sec';
 
  if ($user['access'] === true) {
      header("location: controllers/mainBoardView.php");

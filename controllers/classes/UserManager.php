@@ -19,11 +19,14 @@ class UserManager {
 
      $blockLogin= $db->getBlockLogin($ipAddress);
 
-    //pierwsze logowanie
+     //pierwsze logowanie
      if($blockLogin === []) {
          $sql = "INSERT INTO block_login VALUES (null, 0, null, null, null,'$ipAddress')";
          $db->insert($sql);
      }
+
+     $blockLogin = $blockLogin[0];
+     if($blockLogin->tempLock > time()) $user['tempLock']=$blockLogin->tempLock-time();
 
      if ($user['access'] === true)
         { //Poprawne dane
@@ -43,14 +46,18 @@ class UserManager {
             $sql = "INSERT INTO logged_in_users (userId, lastUpdate, logSuccess, ipAddress) VALUES ('$userId','$date',false,'$ipAddress')";
             $db->insert($sql);
 
-            /*$blockLogin = $blockLogin[0];
-            $blockLogin->lastBadLoginNum = $this->getCurrentDate();
 
-            $blockLogin->badLoginNum++;
-            if($blockLogin->badLoginNum > 2){
-            if($date > $blockLogin->tempLock && $blockLogin->tempLock !== NULL);
-            $time= pow($blockLogin->badLoginNum,2)*60;
-            }*/
+
+            $badLoginNum=$blockLogin->badLoginNum;
+         $badLoginNum++;
+            if($badLoginNum > 2){
+                $timeAdd= pow($badLoginNum,2)*30;
+                $tempLock=time()+$timeAdd;
+                $sql="UPDATE block_login SET tempLock='$tempLock'";
+                $db->update($sql);
+            }
+         $sql="UPDATE block_login SET badLoginNum='$badLoginNum', lastBadLoginNum='$date',ipAddress='$ipAddress'";
+         $db->update($sql);
         }
      if(count($logs) > 9){
          $sql="DELETE FROM logged_in_users WHERE userId='$userId' AND id = (SELECT MIN(id) FROM logged_in_users)";
