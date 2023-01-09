@@ -16,16 +16,20 @@
  if (filter_input(INPUT_POST, "submit")=="Login") {
      
  $user=$um->login($db);
- var_dump($user);
-     $tempLock=$user['tempLock'];
-     $tempLockMin=(int)($tempLock/60);
-     $tempLockSec=(int)($tempLock-($tempLockMin*60));
- if($tempLock !== NULL) echo "Blocked for".$tempLockMin."min ".$tempLockSec."sec.";
 
  if ($user['access'] === true) {
      header("location: controllers/mainBoardView.php");
      
- } else {
+ }
+ if ($user['access']=== 'blocked'){
+     if($user['tempLock'] !== NULL) {
+         $tempLock = $user['tempLock'];
+         $tempLockMin = (int)($tempLock / 60);
+         $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
+         /*if ($tempLock !== NULL)*/ echo "Blocked for" . $tempLockMin . "min " . $tempLockSec . "sec.";
+     }
+ }
+ else {
  echo "<p>Invalid login or password</p>";
  }
  }  

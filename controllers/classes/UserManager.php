@@ -50,8 +50,9 @@ class UserManager {
 
             $badLoginNum=$blockLogin->badLoginNum;
          $badLoginNum++;
-            if($badLoginNum > 2){
-                $timeAdd= pow($badLoginNum,2)*30;
+            if($badLoginNum >= 2){
+                $user['access']='blocked';
+                $timeAdd= pow($badLoginNum,2)*10;
                 $tempLock=time()+$timeAdd;
                 $sql="UPDATE block_login SET tempLock='$tempLock'";
                 $db->update($sql);
