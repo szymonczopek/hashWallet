@@ -16,8 +16,11 @@
  if (filter_input(INPUT_POST, "submit")=="Login") {
      
  $user=$um->login($db);
+ var_dump($user);
      $tempLock=$user['tempLock'];
- if($tempLock !== NULL) echo $user->tempLock.' sec';
+     $tempLockMin=(int)($tempLock/60);
+     $tempLockSec=(int)($tempLock-($tempLockMin*60));
+ if($tempLock !== NULL) echo "Blocked for".$tempLockMin."min ".$tempLockSec."sec.";
 
  if ($user['access'] === true) {
      header("location: controllers/mainBoardView.php");

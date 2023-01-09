@@ -26,7 +26,7 @@ class UserManager {
      }
 
      $blockLogin = $blockLogin[0];
-     if($blockLogin->tempLock > time()) $user['tempLock']=$blockLogin->tempLock-time();
+     if($blockLogin->tempLock > time() || NULL) $user['tempLock']=$blockLogin->tempLock-time();
 
      if ($user['access'] === true)
         { //Poprawne dane
