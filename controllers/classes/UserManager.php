@@ -26,6 +26,13 @@ class UserManager {
      }
 
      $blockLogin = $blockLogin[0];
+     $tempLock=$blockLogin->tempLock;
+     if($tempLock > time()){
+         $sql="UPDATE block_login SET tempLock='$tempLock'";
+         $db->update($sql);
+     }
+     if($tempLock !== NULL) $user['access']='blocked';
+
      if($blockLogin->tempLock > time() || NULL) $user['tempLock']=$blockLogin->tempLock-time();
 
      if ($user['access'] === true)
@@ -49,9 +56,8 @@ class UserManager {
 
 
             $badLoginNum=$blockLogin->badLoginNum;
-         $badLoginNum++;
-            if($badLoginNum >= 2){
-                $user['access']='blocked';
+            $badLoginNum++;
+         if($badLoginNum >= 2){
                 $timeAdd= pow($badLoginNum,2)*10;
                 $tempLock=time()+$timeAdd;
                 $sql="UPDATE block_login SET tempLock='$tempLock'";
