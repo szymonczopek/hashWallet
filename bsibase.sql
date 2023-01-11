@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 08 Sty 2023, 21:54
+-- Czas generowania: 11 Sty 2023, 21:46
 -- Wersja serwera: 10.4.25-MariaDB
 -- Wersja PHP: 8.1.10
 
@@ -30,18 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `block_login` (
   `id` int(11) NOT NULL,
   `badLoginNum` int(11) NOT NULL,
-  `lastBadLoginNum` varchar(11) DEFAULT NULL,
+  `lastBadLoginNum` datetime DEFAULT NULL,
   `pernamentLock` tinyint(4) DEFAULT NULL,
   `tempLock` int(11) DEFAULT NULL,
-  `ipAddress` varchar(11) NOT NULL
+  `ipAddress` varchar(11) NOT NULL,
+  `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `block_login`
 --
 
-INSERT INTO `block_login` (`id`, `badLoginNum`, `lastBadLoginNum`, `pernamentLock`, `tempLock`, `ipAddress`) VALUES
-(3, 5, '2023-01-08 ', NULL, 1673211903, '127.0.0.1');
+INSERT INTO `block_login` (`id`, `badLoginNum`, `lastBadLoginNum`, `pernamentLock`, `tempLock`, `ipAddress`, `userId`) VALUES
+(34, 0, '2023-01-11 21:44:30', NULL, NULL, '127.0.0.1', 156),
+(35, 0, '2023-01-11 21:09:34', NULL, NULL, '127.0.0.1', 157);
 
 -- --------------------------------------------------------
 
@@ -63,30 +65,43 @@ CREATE TABLE `logged_in_users` (
 --
 
 INSERT INTO `logged_in_users` (`sessionId`, `userId`, `lastUpdate`, `logSuccess`, `id`, `ipAddress`) VALUES
-('', 138, '2023-01-08 19:45:45', 0, 89, '127.0.0.1'),
-('fe0jhclc23e36gi9rtp98fr1ee', 138, '2023-01-08 19:57:05', 1, 90, '127.0.0.1'),
-('', 138, '2023-01-08 21:13:59', 0, 91, '127.0.0.1'),
-('', 138, '2023-01-08 21:14:14', 0, 92, '127.0.0.1'),
-('', 138, '2023-01-08 21:14:27', 0, 93, '127.0.0.1'),
-('cancdar4196cvhrph403s1e8ub', 138, '2023-01-08 21:30:20', 1, 94, '127.0.0.1'),
-('', 138, '2023-01-08 21:30:50', 0, 95, '127.0.0.1'),
-('', 138, '2023-01-08 21:32:25', 0, 96, '127.0.0.1'),
-('', 138, '2023-01-08 21:32:57', 0, 97, '127.0.0.1'),
-('', 138, '2023-01-08 21:33:17', 0, 98, '127.0.0.1'),
-('', 138, '2023-01-08 21:36:09', 0, 99, '127.0.0.1'),
-('', 138, '2023-01-08 21:36:53', 0, 100, '127.0.0.1'),
-('', 138, '2023-01-08 21:42:29', 0, 101, '127.0.0.1'),
-('', 138, '2023-01-08 21:43:00', 0, 102, '127.0.0.1'),
-('', 138, '2023-01-08 21:43:40', 0, 103, '127.0.0.1'),
-('cancdar4196cvhrph403s1e8ub', 139, '2023-01-08 21:44:40', 1, 104, '127.0.0.1'),
-('', 139, '2023-01-08 21:45:04', 0, 105, '127.0.0.1'),
-('v9qhslo0p22d8l5h479fe16phu', 139, '2023-01-08 21:47:55', 1, 106, '127.0.0.1'),
-('', 139, '2023-01-08 21:48:28', 0, 107, '127.0.0.1'),
-('', 139, '2023-01-08 21:49:32', 0, 108, '127.0.0.1'),
-('', 139, '2023-01-08 21:49:51', 0, 109, '127.0.0.1'),
-('', 139, '2023-01-08 21:52:18', 0, 110, '127.0.0.1'),
-('', 139, '2023-01-08 21:52:25', 0, 111, '127.0.0.1'),
-('', 139, '2023-01-08 21:52:33', 0, 112, '127.0.0.1');
+('', 157, '2023-01-11 21:09:32', 0, 552, '127.0.0.1'),
+('', 157, '2023-01-11 21:09:34', 0, 553, '127.0.0.1'),
+('p0c6dabbcrjjtl6sg9kgsl7bao', 157, '2023-01-11 21:09:38', 1, 554, '127.0.0.1'),
+('p0c6dabbcrjjtl6sg9kgsl7bao', 157, '2023-01-11 21:09:40', 1, 555, '127.0.0.1'),
+('p0c6dabbcrjjtl6sg9kgsl7bao', 157, '2023-01-11 21:10:01', 1, 556, '127.0.0.1'),
+('p0c6dabbcrjjtl6sg9kgsl7bao', 157, '2023-01-11 21:10:04', 1, 557, '127.0.0.1'),
+('p0c6dabbcrjjtl6sg9kgsl7bao', 157, '2023-01-11 21:10:07', 1, 558, '127.0.0.1'),
+('p0c6dabbcrjjtl6sg9kgsl7bao', 157, '2023-01-11 21:10:25', 1, 559, '127.0.0.1'),
+('gfq22doiplr6qtc5tsj1phq25g', 157, '2023-01-11 21:10:54', 1, 560, '127.0.0.1'),
+('m11fi1qvl9tfur127kbi794bh9', 157, '2023-01-11 21:11:06', 1, 561, '127.0.0.1'),
+('q54uh4jm3b0bqfihd8gl6hubvj', 157, '2023-01-11 21:11:16', 1, 562, '127.0.0.1'),
+('hakprdv1f5pd24jvm7bdkf1r14', 157, '2023-01-11 21:13:36', 1, 563, '127.0.0.1'),
+('47hrit9tb7qjrks54ravimq6gk', 157, '2023-01-11 21:14:06', 1, 564, '127.0.0.1'),
+('47hrit9tb7qjrks54ravimq6gk', 156, '2023-01-11 21:44:04', 1, 565, '127.0.0.1'),
+('', 156, '2023-01-11 21:44:22', 0, 566, '127.0.0.1'),
+('', 156, '2023-01-11 21:44:24', 0, 567, '127.0.0.1'),
+('', 156, '2023-01-11 21:44:27', 0, 568, '127.0.0.1'),
+('', 156, '2023-01-11 21:44:30', 0, 569, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:36', 1, 570, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:40', 1, 571, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:41', 1, 572, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:43', 1, 573, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:48', 1, 574, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:50', 1, 575, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:54', 1, 576, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:57', 1, 577, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 156, '2023-01-11 21:44:58', 1, 578, '127.0.0.1'),
+('7binrfani7fca33c3a4mp8vr0c', 157, '2023-01-11 21:45:06', 1, 579, '127.0.0.1'),
+('g9se6eehkcd2mlq9q4s3dlgl6t', 156, '2023-01-11 21:45:13', 1, 580, '127.0.0.1'),
+('g9se6eehkcd2mlq9q4s3dlgl6t', 156, '2023-01-11 21:45:15', 1, 581, '127.0.0.1'),
+('g9se6eehkcd2mlq9q4s3dlgl6t', 156, '2023-01-11 21:45:20', 1, 582, '127.0.0.1'),
+('g9se6eehkcd2mlq9q4s3dlgl6t', 156, '2023-01-11 21:45:22', 1, 583, '127.0.0.1'),
+('g9se6eehkcd2mlq9q4s3dlgl6t', 157, '2023-01-11 21:45:27', 1, 584, '127.0.0.1'),
+('vfbchau18re8otmvobhh3n2u2q', 156, '2023-01-11 21:45:34', 1, 585, '127.0.0.1'),
+('vfbchau18re8otmvobhh3n2u2q', 156, '2023-01-11 21:45:38', 1, 586, '127.0.0.1'),
+('vfbchau18re8otmvobhh3n2u2q', 156, '2023-01-11 21:45:45', 1, 587, '127.0.0.1'),
+('vfbchau18re8otmvobhh3n2u2q', 156, '2023-01-11 21:46:04', 1, 588, '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -108,8 +123,8 @@ CREATE TABLE `password` (
 --
 
 INSERT INTO `password` (`id_password`, `login`, `password`, `web_address`, `description`, `userId`) VALUES
-(69, 'dssda', 'wpAQifxWFQrUNrZK/W0M8Q==', 'dsadsa', 'dsadsa', 135),
-(84, 'dasda', 'emBJ/cEdrjHDr7uhIHX8zQ==', 'zzz', 'dasda', 138);
+(88, 'ddd', '5AV86Gx9PY5r3Cjta1sSrQ==', 'sss', 'aaa', 156),
+(89, 'yy', 'KEa0U2Q37sPPMhp17irWxA==', 'yy', 'yy', 157);
 
 -- --------------------------------------------------------
 
@@ -130,11 +145,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `login`, `email`, `password`, `salt`) VALUES
-(135, 'szymon', 'szsz@wp.pl', '$2y$10$3ngPNMusmxlxLVZvhU6W/eM3GVsi7yyo2TiQ8Pr/G7TSR4B.6XTVW', '2LcTZM396d'),
-(136, 'www', 'www@wp.pl', '$2y$10$NbP8TSLoSro0IqF2ahdfFedrY25v.va9Upoqxom9VFVZEQIDPkVwO', 'cCLpYM8Zg'),
-(137, 'szsz', 'wwaaw@wp.pl', '$2y$10$PhBgl2686d7rQWlIduKyuOa1kqvpU2Z4QxDlPbvrWzUKj/3IIZvke', 'sNIMjItIWc'),
-(138, 'ddd', 'ddd@wp.pl', '$2y$10$b0zsbXkB6g6.7wd2VUYtfO9MhQz7H5GUaFHgvYr.CXmZAsjzAB/cO', 'xX0Q22SyRN'),
-(139, 'rrr', 'ddd@wp.pl', '$2y$10$/ehrVRDbtZa0PQ6GoD1hKOZbD6hYNAPkaUbkR2bwZ6MFp.mdW088e', '7UF2bVwu6');
+(156, 'ddd', 'sz@wp.pl', '$2y$10$IZl9HyyVYGxvp8JZN7F5cO9wTbQQmbjrmdW2jFbY4QGxd7cxO.qNa', '0CpeMHBJTg'),
+(157, 'eee', 'ee@wp.pl', '$2y$10$UiWvYxQX.FLMr8n4YA3deussUUHH6Po6HreEwou8bwrmFlSuDF1jq', 'zA0WT3E7QG');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -144,7 +156,8 @@ INSERT INTO `users` (`id_user`, `login`, `email`, `password`, `salt`) VALUES
 -- Indeksy dla tabeli `block_login`
 --
 ALTER TABLE `block_login`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_ibfk_1` (`userId`);
 
 --
 -- Indeksy dla tabeli `logged_in_users`
@@ -177,29 +190,35 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `block_login`
 --
 ALTER TABLE `block_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT dla tabeli `logged_in_users`
 --
 ALTER TABLE `logged_in_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=589;
 
 --
 -- AUTO_INCREMENT dla tabeli `password`
 --
 ALTER TABLE `password`
-  MODIFY `id_password` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id_password` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- Ograniczenia dla zrzutów tabel
 --
+
+--
+-- Ograniczenia dla tabeli `block_login`
+--
+ALTER TABLE `block_login`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `logged_in_users`
