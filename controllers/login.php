@@ -14,21 +14,32 @@
  $user=$um->login($db);
  if($user === NULL) echo "<p>User not found</p>"; //brak usera
 else{
-    if ($user['access'] === true && $user['blocked'] === true){ //zablokowane zablokowane logowanie, nawet przy dobrym hasle
-        if($user['tempLock'] !== NULL) {
-            $tempLock = $user['tempLock'];
-            $tempLockMin = (int)($tempLock / 60);
-            $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
-            if($tempLockMin === 0) echo "Blocked for " . $tempLockSec . "sec";
-            else echo "Blocked for " . $tempLockMin . "min " . $tempLockSec . "sec";
-        }else echo "<p>Błąd związany z czasem</p>";
+    if ($user['access'] === true){
+        if ($user['blocked'] === true){ //zablokowane zablokowane logowanie, nawet przy dobrym hasle
+            if($user['tempLock'] !== NULL) {
+                $tempLock = $user['tempLock'];
+                $tempLockMin = (int)($tempLock / 60);
+                $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
+                if($tempLockMin === 0) echo "Blocked for " . $tempLockSec . "sec";
+                else echo "Blocked for " . $tempLockMin . "min " . $tempLockSec . "sec";
+            }else echo "<p>Błąd związany z czasem</p>";
+        }
+        if ($user['blocked'] === false ) { //prawidlowe logowanie
+            header("location: controllers/mainBoardView.php");
+        }
     }
-    if ($user['access'] === true && $user['blocked'] === false ) { //prawidlowe logowanie
-        header("location: controllers/mainBoardView.php");
+        else {
+            if ($user['blocked'] === true){ //zablokowane zablokowane logowanie, nawet przy dobrym hasle
+                if($user['tempLock'] !== NULL) {
+                    $tempLock = $user['tempLock'];
+                    $tempLockMin = (int)($tempLock / 60);
+                    $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
+                    if($tempLockMin === 0) echo "Blocked for " . $tempLockSec . "sec";
+                    else echo "Blocked for " . $tempLockMin . "min " . $tempLockSec . "sec";
+                }else echo "<p>Błąd związany z czasem</p>";
+            }
+        else echo "<p>Invalid password</p>";
+         }
     }
- else {
- echo "<p>Invalid password</p>";
  }
-}
- }  
 ?>
