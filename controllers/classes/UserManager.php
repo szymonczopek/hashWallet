@@ -16,6 +16,26 @@ class UserManager {
     if($user === NULL) return $user; // nie ma takiego usera
      $userId=$user['id'];
      $ipAddress = $_SERVER['REMOTE_ADDR'];
+     $blockLogin= $db->getBlockLogin($ipAddress,$userId);
+     $blockLogin = $blockLogin[0];
+
+     //sprawdzenie czy jest blokada na wpisywanie hasla
+     $tempLock=$blockLogin->tempLock;
+     if($tempLock === NULL) { //brak blokady logowania
+         $user['blocked']=false;
+     }
+     else{ //jest blokada
+         if($tempLock > time()){ //czas jeszcze nie uplynal
+             $user['blocked']=true;
+             $user['tempLock']=$blockLogin->tempLock-time(); //ile czasu zostalo
+         }else { //czas juz spadl, nastepuje odblokowanie
+             $sql="UPDATE block_login SET tempLock=NULL WHERE userId='$userId'";
+             $db->update($sql);
+             $user['blocked']=false;
+             $sql="UPDATE block_login SET badLoginNum=0 WHERE userId='$userId'";
+             $db->update($sql);
+         }
+     }
 
 
      if ($user['access'] === true)
@@ -31,6 +51,7 @@ class UserManager {
 
              $sql="INSERT INTO logged_in_users VALUES ('$idSession','$userId','$date',true,null,'$ipAddress')";
              $db->insert($sql);
+
         } else { //zle wpisane haslo, zarejestrowanie tego
             $date = $this->getCurrentDate();
             $sql = "INSERT INTO logged_in_users (userId, lastUpdate, logSuccess, ipAddress) VALUES ('$userId','$date',false,'$ipAddress')";
@@ -55,21 +76,7 @@ class UserManager {
          $sql="DELETE FROM logged_in_users WHERE userId='$userId' AND id = (SELECT MIN(id) FROM logged_in_users)";
          $db->delete($sql);
      }
-     //sprawdzenie czy jest blokada na wpisywanie hasla
-     $tempLock=$blockLogin->tempLock;
-     if($tempLock === NULL) $user['blocked']=false; //brak blokady logowania
-     else{
-         if($tempLock > time()){ //czas jeszcze nie uplynal
-             $user['blocked']=true;
-             $user['tempLock']=$blockLogin->tempLock-time(); //ile czasu zostalo
-         }else { //czas juz spadl, nastepuje odblokowanie
-             $sql="UPDATE block_login SET tempLock=NULL WHERE userId='$userId'";
-             $db->update($sql);
-             $user['blocked']=false;
-             $sql="UPDATE block_login SET badLoginNum=0 WHERE userId='$userId'";
-             $db->update($sql);
-         }
-     }
+
      return $user;
  }
  

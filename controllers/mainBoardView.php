@@ -94,6 +94,7 @@
 
           $res=$db->getPasswordRow($userId);
     if($res!=null) {
+        echo '<div class="tableTitle">Passwords wallet</div>';
         echo '<table>';
         echo '<thead>';
         echo '<tr>';

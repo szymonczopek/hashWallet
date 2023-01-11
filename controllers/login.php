@@ -12,11 +12,14 @@
  if (filter_input(INPUT_POST, "submit")=="Login") {
      
  $user=$um->login($db);
+    if($user !== NULL) $userId=$user['id'];
+     $ipAddress = $_SERVER['REMOTE_ADDR'];
+
  if($user === NULL) echo "<p>User not found</p>"; //brak usera
 else{
-    if ($user['access'] === true){
-        if ($user['blocked'] === true){ //zablokowane zablokowane logowanie, nawet przy dobrym hasle
-            if($user['tempLock'] !== NULL) {
+    if ($user['access'] === true){ //poprawne dane
+        if ($user['blocked'] === true){ //zablokowany
+            if($user['tempLock'] !== NULL) { //wyswietlanie czasu
                 $tempLock = $user['tempLock'];
                 $tempLockMin = (int)($tempLock / 60);
                 $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
@@ -24,14 +27,20 @@ else{
                 else echo "Blocked for " . $tempLockMin . "min " . $tempLockSec . "sec";
             }else echo "<p>Błąd związany z czasem</p>";
         }
-        if ($user['blocked'] === false ) { //prawidlowe logowanie
+        else {
+            //prawidlowe logowanie
+            $sql="UPDATE block_login SET badLoginNum=0 WHERE userId='$userId' AND ipAddress='$ipAddress'";
+            $db->update($sql);
             header("location: controllers/mainBoardView.php");
         }
-    }
-        else {
-            if ($user['blocked'] === true){ //zablokowane zablokowane logowanie, nawet przy dobrym hasle
-                if($user['tempLock'] !== NULL) {
-                    $tempLock = $user['tempLock'];
+        }
+        else { //niepoprawne dane
+            if ($user['blocked'] === true){
+                $blockLogin= $db->getBlockLogin($ipAddress,$userId); //ile czasu zostalo jeszcze raz zeby bylo aktualne
+                $blockLogin = $blockLogin[0];
+                $tempLock=$blockLogin->tempLock;
+                $tempLock=$tempLock-time();
+                if($tempLock !== NULL) {
                     $tempLockMin = (int)($tempLock / 60);
                     $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
                     if($tempLockMin === 0) echo "Blocked for " . $tempLockSec . "sec";
