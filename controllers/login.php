@@ -12,23 +12,23 @@
  if (filter_input(INPUT_POST, "submit")=="Login") {
      
  $user=$um->login($db);
-
- if ($user['access'] === true && $user['blocked'] === false) {
-     header("location: controllers/mainBoardView.php");
-     
- }
- if ($user['blocked'] === true){
-     if($user['tempLock'] !== NULL) {
-         $tempLock = $user['tempLock'];
-
-         echo "Blocked for".$tempLock."sec.";
-         /*$tempLockMin = (int)($tempLock / 60);
-         $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
-         echo "Blocked for" . $tempLockMin . "min " . $tempLockSec . "sec.";*/
-     }else echo "<p>Błąd związany z czasem</p>";
- }
+ if($user === NULL) echo "<p>User not found</p>"; //brak usera
+else{
+    if ($user['access'] === true && $user['blocked'] === true){ //zablokowane zablokowane logowanie, nawet przy dobrym hasle
+        if($user['tempLock'] !== NULL) {
+            $tempLock = $user['tempLock'];
+            $tempLockMin = (int)($tempLock / 60);
+            $tempLockSec = (int)($tempLock - ($tempLockMin * 60));
+            if($tempLockMin === 0) echo "Blocked for " . $tempLockSec . "sec";
+            else echo "Blocked for " . $tempLockMin . "min " . $tempLockSec . "sec";
+        }else echo "<p>Błąd związany z czasem</p>";
+    }
+    if ($user['access'] === true && $user['blocked'] === false ) { //prawidlowe logowanie
+        header("location: controllers/mainBoardView.php");
+    }
  else {
- echo "<p>Invalid login or password</p>";
+ echo "<p>Invalid password</p>";
  }
+}
  }  
 ?>

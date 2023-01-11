@@ -16,6 +16,15 @@
 .plansza-form input[type="submit"]:hover{
     background: gold;
 }
+.logged{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.tableTitle{
+    font-size: 30px;
+    color: gold;
+}
 
 .main table th{
     padding: 4px;
@@ -38,8 +47,8 @@
     align-items: center;
 } 
 .login{
-    color: white;
-    font-size: 25px;
+    color: gold;
+    font-size: 30px;
     margin: 40px 0;
 }
 

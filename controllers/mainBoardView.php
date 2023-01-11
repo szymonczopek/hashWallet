@@ -57,6 +57,7 @@
 
           $logs=$db->getLog($userId);
           if($logs!=null) {
+              echo '<div class="tableTitle">Last login</div>';
               echo '<table>';
               echo '<thead>';
               echo '<tr>';

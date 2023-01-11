@@ -1,7 +1,7 @@
 <?php
 include_once "classes/Baza.php";
 $bd=new Baza("localhost","root","","bsiBase");
-
+$ipAddress = $_SERVER['REMOTE_ADDR'];
  
 if(filter_input(INPUT_POST,"submit"))
     {
@@ -48,7 +48,12 @@ if(filter_input(INPUT_POST,"submit"))
                     $pass=password_hash($pass,HASH_HMAC);
                 }
 
+
                 $bd->insert("INSERT INTO users VALUES (NULL,'$login','$email','$pass','$salt')");
+                $user = $bd->selectUser($login, $pass, "users");
+                $userId=$user['id'];
+                $bd->insert("INSERT INTO block_login VALUES (null, 0, null, null, null,'$ipAddress','$userId')");
+                echo "Register success";
             }else{
                 echo "<br>Invalid data: ".$errors."</br>Hover over a field for hints";
             }

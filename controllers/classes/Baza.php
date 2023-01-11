@@ -68,10 +68,10 @@ class Baza {
         }
         return $tresc;
     }
-    function getBlockLogin($ipAddress)
+    function getBlockLogin($ipAddress, $userId)
     {
         $tresc = [];
-        if ($result = $this->mysqli->query("select * from block_login where ipAddress='$ipAddress'")) {
+        if ($result = $this->mysqli->query("select * from block_login where ipAddress='$ipAddress' AND userId='$userId'")) {
 
             while ($row = $result->fetch_object()) {
                 array_push($tresc,$row);
@@ -125,11 +125,13 @@ class Baza {
                  }else {
                      $user['access']=false;
                  }
+         } else {
+             $user=NULL;
          }
-     } else echo "<p>Invalid login</p>";
+     }
 
-    
     return $user;
+
 }
    
 }
