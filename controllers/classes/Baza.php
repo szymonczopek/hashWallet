@@ -22,9 +22,6 @@ class Baza {
     }
 
     public function selectPole($sql, $pola) {
-        //parametr $sql – łańcuch zapytania select
-        //parametr $pola - tablica z nazwami pol w bazie
-        //Wynik funkcji – kod HTML tabeli z rekordami (String)
         $tresc = " ";
         if ($result = $this->mysqli->query($sql)) {
             $ilepol = count($pola); //ile pól
@@ -129,9 +126,10 @@ class Baza {
                      $user['access']=false;
                  }
          }
-     }
+     } else echo "<p>Invalid login</p>";
+
     
-    return $user; //id zalogowanego użytkownika(>0) lub -1
+    return $user;
 }
    
 }

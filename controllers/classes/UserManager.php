@@ -5,8 +5,8 @@ class UserManager {
  
  
  function login($db) {
- //funkcja sprawdza poprawność logowania
- //wynik - id użytkownika zalogowanego lub -1
+
+
      $data=$this->validateLogin(INPUT_POST);
 
     $login = $data["login"];
@@ -18,22 +18,14 @@ class UserManager {
      $logs= $db->getLog($userId);
 
      $blockLogin= $db->getBlockLogin($ipAddress);
+     $blockLogin = $blockLogin[0];
 
      //pierwsze logowanie
-     if($blockLogin === []) {
+     if($blockLogin === NULL) {
          $sql = "INSERT INTO block_login VALUES (null, 0, null, null, null,'$ipAddress')";
          $db->insert($sql);
      }
 
-     $blockLogin = $blockLogin[0];
-     $tempLock=$blockLogin->tempLock;
-     if($tempLock > time()){
-         $sql="UPDATE block_login SET tempLock='$tempLock'";
-         $db->update($sql);
-     }
-     if($tempLock !== NULL) $user['access']='blocked';
-
-     if($blockLogin->tempLock > time() || NULL) $user['tempLock']=$blockLogin->tempLock-time();
 
      if ($user['access'] === true)
         { //Poprawne dane
@@ -53,22 +45,38 @@ class UserManager {
             $sql = "INSERT INTO logged_in_users (userId, lastUpdate, logSuccess, ipAddress) VALUES ('$userId','$date',false,'$ipAddress')";
             $db->insert($sql);
 
-
-
             $badLoginNum=$blockLogin->badLoginNum;
-            $badLoginNum++;
-         if($badLoginNum >= 2){
+            if($badLoginNum >= 2){
                 $timeAdd= pow($badLoginNum,2)*10;
                 $tempLock=time()+$timeAdd;
                 $sql="UPDATE block_login SET tempLock='$tempLock'";
                 $db->update($sql);
             }
+         $badLoginNum++;
          $sql="UPDATE block_login SET badLoginNum='$badLoginNum', lastBadLoginNum='$date',ipAddress='$ipAddress'";
          $db->update($sql);
         }
+     // jesli powyzej 10 wpisow to usuwa najstarszy
      if(count($logs) > 9){
          $sql="DELETE FROM logged_in_users WHERE userId='$userId' AND id = (SELECT MIN(id) FROM logged_in_users)";
          $db->delete($sql);
+     }
+     //sprawdzenie czy jest blokada na wpisywanie hasla
+     $blockLogin= $db->getBlockLogin($ipAddress);
+     $blockLogin = $blockLogin[0];
+     $tempLock=$blockLogin->tempLock;
+     if($tempLock === NULL) $user['blocked']=false; //brak blokady logowania
+     else{
+         if($tempLock > time()){ //czas jeszcze nie uplynal
+             $user['blocked']=true;
+             $user['tempLock']=$blockLogin->tempLock-time(); //ile czasu zostalo
+         }else { //czas juz spadl, nastepuje odblokowanie
+             $sql="UPDATE block_login SET tempLock=NULL";
+             $db->update($sql);
+             $user['blocked']=false;
+             $sql="UPDATE block_login SET badLoginNum=0";
+             $db->update($sql);
+         }
      }
      return $user;
  }
