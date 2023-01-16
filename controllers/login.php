@@ -3,7 +3,8 @@
  include_once 'classes/UserManager.php';
  $db = new Baza("localhost", "root", "", "bsiBase");
  $um = new UserManager();
-
+ $date=new DateTime('now');
+ $date=$date->format("Y-m-d H:i:s");
  //parametr z GET – akcja = wyloguj
  if (filter_input(INPUT_GET, "akcja")=="wyloguj") {
  $um->logout($db);
@@ -29,6 +30,9 @@ else{
         }
         else {
             //prawidlowe logowanie
+            $idSession=$user['idSession'];
+            $sql="INSERT INTO logged_in_users VALUES ('$idSession','$userId','$date',true,null,'$ipAddress')";
+            $db->insert($sql);
             $sql="UPDATE block_login SET badLoginNum=0 WHERE userId='$userId' AND ipAddress='$ipAddress'";
             $db->update($sql);
             header("location: controllers/mainBoardView.php");

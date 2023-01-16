@@ -46,12 +46,9 @@ class UserManager {
              $_SESSION['passwd'] = $passwd;
              $_SESSION['userId'] = $user['id'];
 
-             $date = $this->getCurrentDate();
-             $idSession = session_id();
-
-             $sql="INSERT INTO logged_in_users VALUES ('$idSession','$userId','$date',true,null,'$ipAddress')";
-             $db->insert($sql);
-
+            $date = $this->getCurrentDate();
+            $idSession = session_id();
+            $user['idSession']=$idSession;
         } else { //zle wpisane haslo, zarejestrowanie tego
             $date = $this->getCurrentDate();
             $sql = "INSERT INTO logged_in_users (userId, lastUpdate, logSuccess, ipAddress) VALUES ('$userId','$date',false,'$ipAddress')";
@@ -73,7 +70,7 @@ class UserManager {
      // jesli powyzej 10 wpisow to usuwa najstarszy
      $logs= $db->getLog($userId);
      if(count($logs) > 9){
-         $sql="DELETE FROM logged_in_users WHERE userId='$userId' AND id = (SELECT MIN(id) FROM logged_in_users)";
+         $sql="DELETE FROM logged_in_users WHERE userId='$userId' AND ipAddress='$ipAddress' AND id = (SELECT MIN(id) FROM logged_in_users)";
          $db->delete($sql);
      }
 
