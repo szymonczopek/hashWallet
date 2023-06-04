@@ -27,3 +27,9 @@ After configuring the database connection, you can proceed to launch the project
 ### 5. Open the project in a browser:</br>
 
 Open a web browser and type `localhost/hashWallet-main` in the address bar. The project should now be running, and the website should be visible in the browser.
+
+### 6. Unit Tests:
+
+This command will execute PHPUnit and run the tests located in the tests directory. 
+
+    ./vendor/bin/phpunit --testdox tests
