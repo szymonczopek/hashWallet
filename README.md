@@ -19,4 +19,11 @@ Using Git repository, you can use this command:
 ### 3. Import database:
 
 Import the SQL code from `bsibase.sql` into a MySQL database, you we will call `bsibase`.
-xampp\htdocs\bsi\index.php
+
+### 4. Launching the project:</br>
+
+After configuring the database connection, you can proceed to launch the project. Make sure that the Apache server is running in XAMPP or WAMP. Move the project files to the folder where the Apache server is running (e.g., `htdocs` in XAMPP or `www` in WAMP).
+
+### 5. Open the project in a browser:</br>
+
+Open a web browser and type `localhost/hashWallet-main` in the address bar. The project should now be running, and the website should be visible in the browser.
